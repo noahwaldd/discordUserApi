@@ -1,0 +1,34 @@
+{
+  "name": "discord-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "deploy": "node deployCommands.js"
+  },
+  "type": "module",
+  "author": "noah",
+  "license": "ISC",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "cors": "^2.8.5",
+    "dayjs": "^1.11.13",
+    "discord.js": "^14.16.3",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "node-fetch": "^3.3.2",
+    "request-ip": "^3.3.0",
+    "fs": "0.0.1-security",
+    "path": "^0.12.7",
+    "url": "^0.11.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/request-ip": "^0.0.41",
+    "tsx": "^3.14.0",
+    "typescript": "^5.7.2",
+    "ts-node": "^10.4.0"
+  }
+}

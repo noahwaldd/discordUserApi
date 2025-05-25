@@ -21,8 +21,26 @@ const client = new Client({
 
 const app = express();
 
+const allowedOrigins = [
+  'http://localhost:3000', 
+  'http://127.0.0.1:3000'
+];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    // Permite requisições sem 'origin' (como apps mobile ou Postman) OU se a origem está na lista
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Acesso não permitido por CORS'));
+    }
+  },
+  methods: ["GET"] // Mantém apenas os métodos que você realmente usa (GET neste caso)
+};
+
 app.use(requestIp.mw());
-app.use(cors({ origin: "*", methods: ["GET"] }));
+// Aplica o CORS com as opções restritas
+app.use(cors(corsOptions)); 
 
 config();
 registerRoutes(app);

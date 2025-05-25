@@ -94,7 +94,6 @@ function formatUserData(response, target, presence) {
     createdAt: target.createdAt,
     createdTimestamp: target.createdTimestamp,
     username: response.user.username,
-    tag: target.tag,
     global_name: response.user.global_name,
     legacy_username: response?.legacy_username || null,
     avatar_url: target.displayAvatarURL({ size: 4096, extension: "png" }),

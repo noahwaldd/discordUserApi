@@ -8,6 +8,8 @@ import fs from 'fs';
 import { fileURLToPath } from 'url';
 import path from 'path';
 import registerRoutes from "./handler.js";
+import { REST, Routes, SlashCommandBuilder, Events } from "discord.js";
+import { registerSlashCommands, handleSlashCommands } from "./commands/botCommands.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -43,6 +45,26 @@ process.on("uncaughtException", (e) => {
 });
 process.on("uncaughtExceptionMonitor", (e) => {
   console.error(e);
+});
+
+client.once('ready', async () => {
+  console.log("[🤖 DISCORD BOT]".bgCyan, `Connected: ${client.user?.tag}`.cyan);
+
+  // Definir status e atividade padrão do bot
+  client.user.setPresence({
+    status: 'dnd', // 'online', 'idle', 'dnd', 'invisible'
+    activities: [{
+      name: 'API v10', // Texto da atividade
+      type: 3, // 0: Playing, 1: Streaming, 2: Listening, 3: Watching, 4: Custom, 5: Competing
+    }],
+  });
+
+  try {
+    await registerSlashCommands(client, process.env.bot_token);
+    handleSlashCommands(client);
+  } catch (error) {
+    console.error(error);
+  }
 });
 
 export { client };

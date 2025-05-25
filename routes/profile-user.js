@@ -10,10 +10,6 @@ export const method = "get";
 export const name = "/profile/user/:id";
 
 export const execute = async (req, res) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-
   const { id } = req.params;
 
   const tokens = process.env.DISCORD_TOKENS?.split(",") || [];
@@ -42,7 +38,11 @@ export const execute = async (req, res) => {
     }
 
     if (!response) {
-      res.status(500).json({ status: 500, message: "Erro ao obter o perfil do usuário." });
+      console.error(`Falha ao obter perfil do usuário ${id} após tentar todos os tokens disponíveis`);
+      res.status(500).json({ 
+        status: 500, 
+        message: "Erro ao obter o perfil do usuário após tentar todos os tokens disponíveis." 
+      });
       return;
     }
 

@@ -32,7 +32,6 @@ export async function registerSlashCommands(client, token) {
       { body: commandsData.map(cmd => cmd.toJSON()) },
     );
     console.log('[🤖 DISCORD BOT] Slash commands registrados globalmente!'.bgCyan);
-    console.log('Dados do registro:', data);
   } catch (error) {
     console.error('[🤖 DISCORD BOT] Erro ao registrar comandos slash:'.red);
     console.error(error);

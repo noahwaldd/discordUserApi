@@ -33,7 +33,6 @@ app.listen(PORT, () => {
   console.log("[📡 EXPRESS SERVER]".bgMagenta, `Online: Port ${PORT}`.magenta);
 
   client.login(process.env?.bot_token).then(() => {
-    console.log("[🤖 DISCORD BOT]".bgCyan, `Connected: ${client.user?.tag}`.cyan);
   }).catch(console.error);
 });
 
